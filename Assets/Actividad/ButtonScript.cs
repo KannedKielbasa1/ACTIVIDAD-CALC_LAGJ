@@ -2,20 +2,16 @@ using UnityEngine;
 
 public class ButtonScript : MonoBehaviour
 {
-    public string buttonValue; // El valor del botón
+    public string buttonValue;  // El valor del botón que se usará en la calculadora
 
-    // Este método se llama cuando el proyectil colisiona con el botón
+    // Este método detecta la colisión
     private void OnCollisionEnter(Collision collision)
     {
-        // Verificamos si el objeto que colisionó tiene el componente ProjectileStandard
-        if (collision.gameObject.GetComponent<Unity.FPS.Gameplay.ProjectileStandard>())
+        // Verificamos que el objeto que impactó el botón tiene el tag "Projectile"
+        if (collision.gameObject.CompareTag("Projectile"))
         {
-            // Aquí puedes agregar cualquier código adicional si quieres realizar algo con el botón
-
-            // Destruir el proyectil cuando colisiona
-            Destroy(collision.gameObject);
-
-            Debug.Log("Proyectil destruido tras colisionar con el botón: " + buttonValue);
+            Debug.Log("Botón presionado: " + buttonValue);
+            CalculatorManager.Instance.ButtonPressed(buttonValue);
         }
     }
 }
